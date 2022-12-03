@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ArticleController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +14,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
+
+// app.blade.phpはレイアウト。実のデータを持ってくるためにはdashboardをリンク先として指定すること。
+// Route::get('/', function () {
+//     return view('layouts/dashboard');
+// });
+
+// ①リンク先で/が指定されたらarticleという名前がついたページに遷移する
+Route::redirect('/', 'article');
+
+// ②articleという名前がついたページにいくと、ArticleControllerのクラスが呼び出される
+Route::resource('article', ArticleController::class);
