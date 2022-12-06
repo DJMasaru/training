@@ -12,13 +12,29 @@ class DatabaseSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
-    {
+    // public function run()
+    // {
         // \App\Models\User::factory(10)->create();
 
         // \App\Models\User::factory()->create([
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
+    // }
+
+    private const SEEDERS = [
+        ArticleSeeder::class,
+    ];
+    public function run()
+    {
+
+        foreach(self::SEEDERS as $seeder) {
+            $this->call($seeder);
+        }
+
     }
+
+
+
+
 }

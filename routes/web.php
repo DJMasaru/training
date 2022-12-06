@@ -14,16 +14,6 @@ use App\Http\Controllers\ArticleController;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-
-
-// app.blade.phpはレイアウト。実のデータを持ってくるためにはdashboardをリンク先として指定すること。
-// Route::get('/', function () {
-//     return view('layouts/dashboard');
-// });
-
 // ①リンク先で/が指定されたらarticleという名前がついたページに遷移する
 Route::redirect('/', 'article');
 
