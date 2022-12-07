@@ -7,6 +7,8 @@ use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
+use App\Person;
+use Illuminate\Support\Facades\DB;
 
 class ArticleController extends Controller
 {
@@ -15,16 +17,18 @@ class ArticleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         // ④DBから記事情報を取得して変数に代入。
         // $articles = Article::all();
 
         // 更新した順に並び替え
-        $articles = Article::orderby('created_at', 'desc')->get();
-
+        // $articles = Article::orderby('created_at', 'desc')->get();
         //③記事一覧画面を表示。articleというリンク先（名前？）についてはlayouts/dashboardというものをviewさせるという意味になる！compactには上記の変数を入れており、DBからのデータを反映させている。
-        return view('layouts/dashboard', compact('articles'));
+        // return view('layouts/dashboard', compact('articles'));
+
+        $articles = Article::Paginate(10);
+        return view('layouts/dashboard', ['articles' => $articles]);
     }
 
     /**

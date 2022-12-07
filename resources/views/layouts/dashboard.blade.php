@@ -32,4 +32,5 @@ Routeにはリンク先をdashboardと指定すること。 --}}
             </a>
         </article>
     @endforeach
+    {{$articles->links()}}
 @endsection

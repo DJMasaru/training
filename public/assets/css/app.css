@@ -128,6 +128,17 @@ p {
 #main div {
     display: flex;
     gap: 15px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.w-5.h-5
+{
+    width: 20px;
+}
+.flex.justify-between.flex-1.sm:hidden{
+    display: none;
 }
 
 /* Mobile
@@ -164,3 +175,11 @@ p {
 #main #show  p {
             white-space: pre-line;
         }
+
+.pagination{
+    font-size: 10px;
+}
+
+.pagination li{
+    display: inline-block;
+}
