@@ -20,8 +20,7 @@ class ArticleController extends Controller
     public function index()
     {
         $articles = Article::orderBy('created_at', 'desc')->Paginate(10);
-
-        return view('layouts/create', ['articles' => $articles]);
+            return view('layouts/dashboard', ['articles' => $articles]);
     }
 
     /**
@@ -46,12 +45,12 @@ class ArticleController extends Controller
         //フォームに入力された内容を変数に取得
         $form = $request->all();
 
-        // フォームに入力された内容をデータベースへ登録
+        // フォームに入力された内容をデータベースへ登録、まずインスタンスを作る
         $article = new Article();
         $article->fill($form)->save();
 
         // 記事一覧画面を表示
-        return redirect()->route('dashboard.index');
+            return redirect()->route('index');
     }
 
     /**
@@ -61,14 +60,12 @@ class ArticleController extends Controller
      * @return \Illuminate\Http\RedirectResponse
      */
 
-    public function show(Article $article)
+    public function show($id)
     {
-        //記事閲覧画面を表示。上記の$articleが以下のcompactに入る。
-        // $article = Article::find($article->id);
-        // $article = DB::table('articles')->get();
-
-        return view('layouts/show', compact('article'));
-
+        //show.blade.phpから渡されたidに該当するarticleを見つけ、詳細を表示する
+        $article = Article::findOrFail($id);
+            return view('layouts/show')
+                ->with(['article' => $article]);
     }
 
     /**
@@ -77,10 +74,12 @@ class ArticleController extends Controller
      * @param  \App\Models\Article  $article
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function edit(Article $article)
+    public function edit($id)
     {
-        //記事編集画面を表示
-        return view('layouts/edit', compact('article'));
+         //show.blade.phpから渡されたidに該当するarticleを編集する
+        $article= Article::find($id);
+            return view('layouts/edit')
+                ->with('article',$article);
     }
 
     /**
@@ -92,14 +91,13 @@ class ArticleController extends Controller
      */
     public function update(Request $request, Article $article)
     {
-        //フォームに入力された内容を変数に取得
+        $article = Article::find($request->id);
         $form = $request->all();
-
-        // フォームに入力された内容をデータベースへ登録
+        unset($form['_token']);
         $article->fill($form)->save();
+            return redirect('index');
 
-        // 記事閲覧画面を表示
-        return redirect(route('dashboard.show', ['article' => $article->id]));
+
     }
 
     /**
@@ -108,12 +106,11 @@ class ArticleController extends Controller
      * @param  \App\Models\Article  $article
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function destroy(Article $article)
+    public function destroy($id)
     {
-        // データベースから削除
+        //show.blade.phpから渡されたidに該当するarticleを削除する
+        $article= Article::find($id);
         $article->delete();
-
-        // 記事一覧画面を表示
-        return redirect(route('dashboard.index'));
+            return redirect(route('index'));
     }
 }

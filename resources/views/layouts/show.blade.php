@@ -5,19 +5,23 @@
 @endsection
 
 @section('content')
+    <p>{{$article->content}}</p>
     <ul id="blog-menu">
-        <li><a href="{{route('dashboard.edit', ['dashboard' => $article->id])}}" class="btn">編集</a></li>
         <li>
-            <form action="{{route('dashboard.destroy', ['dashboard' => $article->id])}}" method="post" onsubmit="return confirm('本当に削除しますか？')">
-                @csrf
+            <a href="{{route('article.edit', $article->id)}}" class="btn">編集</a>
+        </li>
+        <li>
+            <form action="{{route('article.destroy', $article->id)}}" method="post" onsubmit="return confirm('ほんまに消してええんか？')">
                 @method('delete')
+                @csrf
                 <button type="submit" class="btn">削除</button>
             </form>
         </li>
-        <li><a href="{{route('dashboard.index')}}" class="btn">戻る</a></li>
+        <li>
+            <a href="{{route('index')}}" class="btn">戻る</a>
+        </li>
     </ul>
-
     <div id="show">
-        {!! Str::markdown($article->content) !!}
+        {{-- {!! Str::markdown($article->content) !!} --}}
     </div>
 @endsection

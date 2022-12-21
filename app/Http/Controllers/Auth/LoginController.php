@@ -42,7 +42,7 @@ class LoginController extends Controller
 
     public function redirectPath()
     {
-        // return 'layouts/create';
+        return 'index';
         //例）return 'costs/index';
     }
 }

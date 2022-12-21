@@ -17,14 +17,15 @@ use App\Http\Controllers\HomeController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-// 見るだけのルーティング
-Route::get('/', 'App\Http\Controllers\ArticleControllerShow@index');
-
-
-// 認証ルート。グループ化してリソースコントローラーに認証機能をつけた。
-// Routeの部分で/dashboardとリンク先を指定するとmiddleware発動しlogin画面に遷移。login後のリダイレクト先は
 Auth::routes();
 Route::group(['middleware'=> 'auth'],function(){
-    Route::resource('dashboard', ArticleController::class);
+    Route::controller(ArticleController::class)->group(function() {
+        Route::get('/index', 'index')->name('index');
+        Route::get('article/create', 'create')->name('article.create');
+        Route::post('article/create', 'store')->name('article.store');
+        Route::patch('article/{id}/update', 'update')->name('article.update');
+        Route::get('article/{id}/edit', 'edit')->name('article.edit');
+        Route::get('article/{id}', 'show')->name('article.show');
+        Route::delete('article/{id}/destroy', 'destroy')->name('article.destroy');
+    });
 });
