@@ -2,10 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ArticleController;
-use App\Http\Controllers\ArticleControllerShow;
-use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Controllers\HomeController;
 
 /*
 |--------------------------------------------------------------------------
