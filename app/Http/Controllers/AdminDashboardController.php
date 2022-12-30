@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Article;
+use App\Models\Category;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -29,8 +30,9 @@ class AdminDashboardController extends Controller
      */
     public function create(): View|Factory|Application
     {
+        $categories = Category::all();
         // 記事投稿画面を表示
-        return view('layouts/create');
+        return view('layouts/create', ['categories' => $categories]);
     }
 
     /**
@@ -43,11 +45,10 @@ class AdminDashboardController extends Controller
     {
         //フォームに入力された内容を変数に取得
         $form = $request->all();
-
         // フォームに入力された内容をデータベースへ登録、まずインスタンスを作る
         $article = new Article();
         $article->fill($form)->save();
-
+        $article->categories()->attach($form['categoryId']);
         // 記事一覧画面を表示
         return redirect()->route('dashboard');
     }

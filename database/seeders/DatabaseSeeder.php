@@ -24,6 +24,7 @@ class DatabaseSeeder extends Seeder
 
     private const SEEDERS = [
         ArticleSeeder::class,
+        CategorySeeder::class
     ];
     public function run()
     {

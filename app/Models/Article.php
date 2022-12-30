@@ -12,4 +12,10 @@ class Article extends Model
     protected $fillable = [
         'title', 'content',
     ];
+
+    public function categories(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    {
+        return $this->belongsToMany(Category::class);
+    }
 }
+

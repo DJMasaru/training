@@ -24,6 +24,11 @@
                     </div>
                 </li>
             </ul>
+            <select name="categoryId">
+                    @foreach($categories as $category)
+                        <option value="{{$category->id}}">{{$category->label}}</option>
+                    @endforeach
+            </select>
         </form>
     </div>
 @endsection
