@@ -19,8 +19,9 @@ class AdminDashboardController extends Controller
     public function dashboard(): View|Factory|Application
     {
         $articles = Article::orderBy('updated_at', 'desc' ,'created_at', 'desc')->Paginate(10);
+        $categories = Article::find(1)->categories()->get();
 
-        return view('layouts/dashboard', ['articles' => $articles]);
+        return view('layouts/dashboard', ['articles' => $articles,'categories' => $categories]);
     }
 
     /**

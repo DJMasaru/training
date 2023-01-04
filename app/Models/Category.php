@@ -15,6 +15,6 @@ class Category extends Model
 
     public function Articles(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
-        return $this->belongsToMany(Article::class);
+        return $this->belongsToMany(Article::class, 'article_category', 'category_id', 'article_id', )->withTimestamps();
     }
 }
