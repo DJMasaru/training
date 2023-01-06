@@ -14,9 +14,7 @@
                                         </p>
                                         <h3>{{$article->title}}</h3>
                                         <p>{{$article->content}}</p>
-                                        @foreach($categories as $category)
-                                            <p>{{$category->label}}</p>
-                                        @endforeach
+                                        <p>{{$article->first()->label}}</p>
                                     </a>
                                 </article>
                             @endforeach

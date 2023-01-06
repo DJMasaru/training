@@ -18,11 +18,13 @@ class AdminDashboardController extends Controller
      */
     public function dashboard(): View|Factory|Application
     {
-        $articles = Article::orderBy('updated_at', 'desc' ,'created_at', 'desc')->Paginate(10);
-        $categories = Article::with(['categories'])->get();
+//        $articles = Article::orderBy('updated_at', 'desc' ,'created_at', 'desc')->Paginate(10);
+//        $articleCats = Article::find(1);
+
+        $articles = Article::with("categories")->orderBy('updated_at', 'desc' ,'created_at', 'desc')->paginate(10);
         return view('layouts/dashboard', [
             'articles' => $articles,
-            'categories' => $categories
+//            'articleCats' => $articleCats
         ]);
     }
 
