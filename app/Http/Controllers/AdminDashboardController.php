@@ -82,9 +82,11 @@ class AdminDashboardController extends Controller
     {
          //show.blade.phpから渡されたidに該当するarticleを編集する
         $article= Article::find($id);
+        $categories = Category::all();
 
         return view('layouts/edit')
-                ->with('article',$article);
+                ->with(['article'=> $article,
+                        'categories' => $categories]);
     }
 
     /**
@@ -92,14 +94,16 @@ class AdminDashboardController extends Controller
      *
      * @param Request $request
      * @param Article $article
+     * @param Category $category
      * @return RedirectResponse
      */
-    public function update(Request $request, Article $article): RedirectResponse
+    public function update(Request $request, Article $article, Category $category): RedirectResponse
     {
-        $article = Article::find($request->id);
+        $article = Article::with('categories')->find($request->id);
         $form = $request->all();
         unset($form['_token']);
         $article->fill($form)->save();
+        $article->categories()->sync($form['categoryId']);
 
         return redirect('dashboard');
     }
