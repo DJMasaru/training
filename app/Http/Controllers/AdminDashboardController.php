@@ -19,6 +19,7 @@ class AdminDashboardController extends Controller
     public function dashboard(): View|Factory|Application
     {
         $articles = Article::with("categories")->orderBy('updated_at', 'desc' ,'created_at', 'desc')->paginate(10);
+
         return view('layouts/dashboard', [
             'articles' => $articles,
         ]);
@@ -66,6 +67,7 @@ class AdminDashboardController extends Controller
         //show.blade.phpから渡されたidに該当するarticleを見つけ、詳細を表示する。
 //        categoriesメソッドをwithすることで関連すりテーブルを紐づける
         $article = Article::with("categories")->findOrFail($id);
+
         return view('layouts/dashboardDetail')
                 ->with(['article' => $article]);
     }

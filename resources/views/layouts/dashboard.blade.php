@@ -15,7 +15,7 @@
                         <h3>{{$article->title}}</h3>
                         <p>{{$article->content}}</p>
                         @foreach ($article->categories as $category)
-                             <p>{{$category->label}}</p>
+                             <p>この記事のカテゴリー：{{$category->label}}</p>
                         @endforeach
                     </a>
                 </article>
