@@ -4,6 +4,12 @@
     <div class="article_detail">
         <h1>{{$article->title}}</h1>
         <p>{{$article->content}}</p>
+        <?php $categories = $article->categories->pluck( 'label' ) ?>
+        <?php if (!empty($categories)){  ?>
+            @foreach($categories as $category)
+             <p>{{ $category }}</p>
+            @endforeach
+         <?php }?>
         <ul>
             <li>
                 <a href="{{route('dashboard.article.edit', $article->id)}}" class="btn">編集</a>
