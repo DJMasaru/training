@@ -9,10 +9,9 @@
 
 @section('content')
     <p>{{$article->content}}</p>
-    <?php $categoryLabels = $article->categories->pluck( 'label' ) ?>
-    <?php if (!empty($categoryLabels)){  ?>
-    <p>この記事のカテゴリー：{{$article->categories->implode('label')}}</p>
-    <?php }?>
+    @if(count($article->categories) > 0)
+        <p>この記事のカテゴリー：{{$article->categories->implode('label')}}</p>
+    @endif
     <ul id="blog-menu">
         <li>
             <a href="{{route('index')}}" class="btn">戻る</a>
@@ -30,10 +29,12 @@
                 <a href="{{route('index')}}">全件表示</a>
             </li>
             @foreach($categories as $category)
-                <li><a href="{{route('article.category', $category->id)}}">{{$category->label}}</a></li>
+                <li>
+                    <a href="{{route('article.category', $category->id)}}">{{$category->label}}</a>
+                </li>
             @endforeach
             <li>
-                未分類
+                <a href="{{route('article.category.uncategorized')}}">未分類</a>
             </li>
         </ul>
     </div>

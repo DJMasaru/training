@@ -20,9 +20,11 @@
                 </p>
                 <h3>{{$article->title}}</h3>
                 <p>{{$article->content}}</p>
-                @foreach ($article->categories as $category)
-                    <p>この記事のカテゴリー：{{$category->label}}</p>
-                @endforeach
+                @if(count($article->categories) > 0)
+                    <p>この記事のカテゴリー：{{$article->categories->implode('label')}}</p>
+                @else
+                    <p>この記事のカテゴリー：未分類</p>
+                @endif
             </a>
         </article>
     @endforeach
@@ -42,7 +44,7 @@
                 <li><a href="{{route('article.category', $category->id)}}">{{$category->label}}</a></li>
             @endforeach
             <li>
-                未分類
+                <a href="{{route('article.category.uncategorized')}}">未分類</a>
             </li>
         </ul>
     </div>
