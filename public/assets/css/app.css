@@ -58,6 +58,9 @@ body:before {
     text-decoration: unset;
     transition-duration: 0.5s;
     background: #fff;
+    width: 50%;
+    margin: auto;
+    margin-top: 10px;
 }
 #main .article:hover{
     transform: scale(1.1,1.1);
@@ -107,7 +110,7 @@ p {
 
 
 #main ul {
-    display: flex;
+    /*display: flex;*/
     flex-direction: row;
     justify-content: center;
     align-items: center;
@@ -327,4 +330,29 @@ body#manage:before {
 
 .contents_separate.login {
     justify-content: center;
+}
+.categoriesSelect{
+    top: 35%;
+    right: 77%;
+    border: 1px solid white;
+    background: white;
+    padding: 10px;
+    text-align: center;
+    position: fixed;
+}
+.categoriesSelect ul{
+    list-style: none;
+    margin-bottom: unset;
+    flex-direction: column;
+}
+.categoriesSelect ul li {
+    margin: 5px;
+}
+.categoriesSelect ul li:nth-child(1){
+    border-bottom: 1px dashed black;
+}
+
+.categoriesSelect ul li p:nth-child(3){
+    margin: unset;
+    margin: 5px;
 }

@@ -1,10 +1,7 @@
-{{--このファイルはapp.blade.phpに出力されている。--}}
-{{--具体的には、このファイルの@section等がapp.blade.phpの@yieldに埋め込まれている。--}}
-{{--つまりスケルトン（雛形）がapp.blade.phpで、インスタンス（具体的なデータ群）がこのファイルにあたる。--}}
 @extends('layouts.app')
 
-@section('header')
-    <h1>記事一覧</h1>
+@section('headerCategory')
+    <h1>カテゴリー：未分類</h1>
 @endsection
 
 @section('content')
@@ -20,18 +17,14 @@
                 </p>
                 <h3>{{$article->title}}</h3>
                 <p>{{$article->content}}</p>
-                @if(count($article->categories) > 0)
-                    <p>この記事のカテゴリー：{{$article->categories->implode('label')}}</p>
-                @else
-                    <p>この記事のカテゴリー：未分類</p>
-                @endif
+                <p>この記事のカテゴリー：未分類</p>
             </a>
         </article>
     @endforeach
     {{$articles->links()}}
 @endsection
 
-@section('categoryMenu')
+@section('categoryMenuCategory')
     <div class="categoriesSelect">
         <ul>
             <li>
@@ -40,8 +33,10 @@
             <li>
                 <a href="{{route('index')}}">全件表示</a>
             </li>
-            @foreach($categories as $category)
-                <li><a href="{{route('article.category', $category->id)}}">{{$category->label}}</a></li>
+            @foreach($categoryList as $category)
+                <li>
+                    <a href="{{route('article.category', $category->id)}}">{{$category->label}}</a>
+                </li>
             @endforeach
             <li>
                 <a href="{{route('article.category.uncategorized')}}">未分類</a>

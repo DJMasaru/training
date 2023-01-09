@@ -24,9 +24,12 @@
             <header id="header">
             {{-- 元になるデータは@sectionで纏められている。@yieldでは、埋め込みを行う。 --}}
                 @yield('header')
+                @yield('headerCategory')
             </header>
             <main id="main">
                 @yield('content')
+                @yield('categoryMenu')
+                @yield('categoryMenuCategory')
             </main>
             <footer id="footer">
                 <small>&copy; 2022 Kisiemon</small>
